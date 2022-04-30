@@ -44,7 +44,10 @@ local defaults = {
     fsGroup: 65534,
     runAsUser: 65534,
   },
-  serviceAccountAnnotations:: {}
+
+  serviceAccountAnnotations:: {},
+
+  monitorLabels:: {},
 };
 
 function(params) {
@@ -224,7 +227,7 @@ function(params) {
     metadata+: {
       name: tq.config.name,
       namespace: tq.config.namespace,
-      labels: tq.config.commonLabels,
+      labels: std.mergePatch(tq.config.commonLabels, tq.config.monitorLabels),
     },
     spec: {
       selector: {

@@ -235,7 +235,7 @@ function(params) {
     metadata+: {
       name: tr.config.name,
       namespace: tr.config.namespace,
-      labels: tr.config.commonLabels,
+      labels: std.mergePatch(tr.config.commonLabels, tr.config.monitorLabels),
     },
     spec: {
       selector: {

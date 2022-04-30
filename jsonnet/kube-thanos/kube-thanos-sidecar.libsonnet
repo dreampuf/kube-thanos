@@ -26,6 +26,8 @@ local defaults = {
     for labelName in std.objectFields(defaults.commonLabels)
     if !std.setMember(labelName, ['app.kubernetes.io/version'])
   },
+
+  monitorLabels:: {},
 };
 
 function(params) {
@@ -63,7 +65,7 @@ function(params) {
     metadata+: {
       name: tsc.config.name,
       namespace: tsc.config.namespace,
-      labels: tsc.config.commonLabels,
+      labels: std.mergePatch(tsc.config.commonLabels, tsc.config.monitorLabels),
     },
     spec: {
       selector: {

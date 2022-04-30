@@ -212,7 +212,7 @@ function(params) {
     metadata+: {
       name: ts.config.name,
       namespace: ts.config.namespace,
-      labels: ts.config.commonLabels,
+      labels: std.mergePatch(ts.config.commonLabels, ts.config.commonLabels),
     },
     spec: {
       selector: {

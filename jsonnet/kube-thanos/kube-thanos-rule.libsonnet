@@ -51,7 +51,9 @@ local defaults = {
     runAsUser: 65534,
   },
 
-  serviceAccountAnnotations:: {}
+  serviceAccountAnnotations:: {},
+
+  monitorLabels:: {}
 };
 
 function(params) {
@@ -345,7 +347,7 @@ function(params) {
     metadata+: {
       name: tr.config.name,
       namespace: tr.config.namespace,
-      labels: tr.config.commonLabels,
+      labels: std.mergePatch(tr.config.commonLabels, tr.config.monitorLabels),
     },
     spec: {
       selector: {

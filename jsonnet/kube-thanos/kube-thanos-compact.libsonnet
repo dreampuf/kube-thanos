@@ -192,7 +192,7 @@ function(params) {
     metadata+: {
       name: tc.config.name,
       namespace: tc.config.namespace,
-      labels: tc.config.commonLabels,
+      labels: std.mergePatch(tc.config.commonLabels, tc.config.monitorLabels)
     },
     spec: {
       selector: {

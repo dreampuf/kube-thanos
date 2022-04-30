@@ -74,7 +74,7 @@ function(params)
       metadata+: {
         name: config.name,
         namespace: config.namespace,
-        labels: config.commonLabels,
+        labels: std.mergePatch(config.commonLabels, config.monitorLabels),
       },
       spec: {
         selector: {
